@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% block head %}
+    {% block metas %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    {% endblock %}
+    {% block favicon %}
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    {% endblock %}
 
-    <title>Justified Nav Template for Bootstrap</title>
+    <title>{% block title %}A Test SMS Application{% endblock %}</title>
 
+    {% block styles %}
     <!-- Bootstrap core CSS -->
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="justified-nav.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    {% endblock %}
   </head>
+  {% endblock %}
 
   <body>
-
+    {% block body %}
+    {% block nav %}
     <div class="container">
 
       <div class="masthead">
@@ -56,7 +65,9 @@
           </div>
         </nav>
       </div>
-
+      {% endblock %}
+      {% block content %}
+      {% block page_content %}
       <!-- Jumbotron -->
       <div class="jumbotron">
         <h1>Marketing stuff!</h1>
@@ -82,15 +93,15 @@
           <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
-
+      {% endblock %}
       <!-- Site footer -->
       <footer class="footer">
-        <p>&copy; Company 2017</p>
+          {% block footer %}<p>&copy; Company 2017</p>{% endblock %}
       </footer>
 
     </div> <!-- /container -->
-
-
+    {% endblock %}
+    {% block scripts %}
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -100,5 +111,7 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    {% endblock %}
+  {% endblock %}
   </body>
 </html>
