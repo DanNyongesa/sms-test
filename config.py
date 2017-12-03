@@ -4,7 +4,8 @@
 
 class Config(object):
     '''Base configuration'''
-    debug = True
+    DEBUG = True
+    TESTING = False
 
     @classmethod
     def init_app(cls, app):
@@ -19,12 +20,12 @@ class Development(Config):
 
 class Production(Config):
     '''Production mode'''
-    debug = False
+    DEBUG = False
 
 
 class Testing(Config):
     '''Testing mode'''
-    Testing = True
+    TESTING = True
 
 
 CONFIG = {

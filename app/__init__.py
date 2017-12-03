@@ -9,6 +9,6 @@ def create_app(config_name):
     CONFIG[config_name].init_app(app)
 
     # register blueprints
-    from . import views as views_blueprint
-    app.register_blueprint(views_blueprint, url_prefix='/main')
+    from .views.main import main as main_blueprint
+    app.register_blueprint(main_blueprint, url_prefix='/')
     return app
