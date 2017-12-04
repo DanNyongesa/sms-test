@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint, jsonify, request
 import logging
-from ..models import Message
+from ..models import Feedback
 from dateutil import parser
 
 callbacks = Blueprint('callbacks', __name__)
@@ -18,13 +18,15 @@ def sms_incoming_message():
     """
     from_ = request.values.get('from')
     to_ = request.values.get('to')
-    body = request.values.get('text')
+    text = request.values.get('text')
     timestamp = parser.parse(request.values.get('date'))
     id_ = request.values.get('id')
     linkId = request.values.get('linkId')
-    logging.info("{id} [from: {0} to: {1}] body: {2} [{timestamp}]".format(to_, from_, body, timestamp=timestamp, id=id_))
+    logging.info(
+        "{id} [from: {0} to: {1}] body: {2} [{timestamp}]".format(to_, from_, text, timestamp=timestamp, id=id_))
     # record message
-    message = Message.create(to_=to_, from_=from_, body=body, timestamp=timestamp)
+    message = Feedback.create(to_=to_, from_=from_, text=text, timestamp=timestamp)
+
     return jsonify('Received Message'), 200
 
 
@@ -36,6 +38,7 @@ def sms_delivery_report():
 @callbacks.route('/sms/subscription-notifications')
 def sms_subscription_notification():
     return jsonify("Hello There"), 200
+
 
 @callbacks.route('/sms/sms-opt-out')
 def sms_opt_out():

@@ -9,10 +9,29 @@ basedir = os.path.abspath(os.path.dirname(__file__))  # base directory
 
 class Config(object):
     """Basic general config"""
-    debug = True
+    debug = False
     TESTING = False
+
+    # sqlalchemy configs
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+
+    # ssl
+    SSL_DISABLE = True
+
+    # celery and redis nbackends
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+    CELERY_BROKER_URL = os.environ.get('REDIS_URL', "redis://localhost:6379/0")
+    CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', "redis://localhost:6379/0")
+    REDIS_URL = os.environ.get('REDIS_URL', "redis://localhost:6379/0")
+
+    # africastalking gateway
+    AT_USERNAME = os.environ.get('AT_USERNAME', 'sandbox')
+    AT_APIKEY = os.environ.get('AT_APIKEY', 'dbf335184c63c3f7a46af6f399c956d47c7bfd3603610cbaebd1bbe510959d58')
+    AT_SHORTCODE = os.environ.get('AT_SHORTCODE', '9999')
+
+    # app admins' email
     ADMINS = ['npiusdan@gmail.com']
 
     @classmethod
@@ -23,7 +42,9 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     """Development mode"""
-
+    debug = True
+    AT_ENVIRONMENT = 'sandbox'
+    CSRF_ENABLED = False
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
@@ -44,8 +65,7 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     """Development mode"""
-    DEBUG = False
-
+    CSRF_ENABLED = True
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
