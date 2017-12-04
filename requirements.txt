@@ -10,3 +10,4 @@ raven==6.3.0
 blinker==1.4
 Flask_SQLAlchemy==2.3.2
 Flask_Migrate==2.1.1
+psycopg2==2.7.3.2
