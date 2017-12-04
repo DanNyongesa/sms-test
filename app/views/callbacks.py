@@ -6,9 +6,9 @@ from dateutil import parser
 callbacks = Blueprint('callbacks', __name__)
 
 
-@callbacks.route('/sms/incoming-messages', methods=['post', 'get'])
-def sms_incoming_messages():
-    """Receives sms callbacks from the user
+@callbacks.route('/sms/incoming-message', methods=['post', 'get'])
+def sms_incoming_message():
+    """Receives sms callbacks from the user & saves message to the database
     :param from: The number that sent the message
     :param to: The number to which the message was sent
     :param text: The message content
@@ -28,8 +28,8 @@ def sms_incoming_messages():
     return jsonify('Received Message'), 200
 
 
-@callbacks.route('/sms/delivery-reports')
-def sms_delivery_reports():
+@callbacks.route('/sms/delivery-report')
+def sms_delivery_report():
     return jsonify("Hello There"), 200
 
 
@@ -39,4 +39,4 @@ def sms_subscription_notification():
 
 @callbacks.route('/sms/sms-opt-out')
 def sms_opt_out():
-    return jsonify("Hello There"), 200
+    return jsonify("H   ello There"), 200

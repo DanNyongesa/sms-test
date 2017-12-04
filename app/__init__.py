@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from config import CONFIG
 from .database import db
+from .africastalkinggateway import AT_gateway
 
 
 def create_app(config_name):
@@ -11,6 +12,9 @@ def create_app(config_name):
 
     # intialise a database connection instance
     db.init_app(app)
+
+    # intialize Africa's Talking API Gateway wrapper
+    AT_gateway.init_app(app)
 
     # register blueprints
     from .views.main import main as main_blueprint
