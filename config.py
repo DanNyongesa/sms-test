@@ -83,7 +83,8 @@ class ProductionConfig(Config):
         for logger in loggers:
             logger.addHandler(sys_handler)
 
-        sentry = Sentry(dsn='YOUR_DSN_HERE')
+        sentry = Sentry(app, dsn='https://cdbbe29586fb47229b3320a065f9ebb6:'
+                                 '540138510dc34cafa29271542bde8ae0@sentry.io/254516')
         sentry.init_app(app)
 
 
