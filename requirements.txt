@@ -1,8 +1,10 @@
 AfricastalkingGateway==1.9
 blinker==1.4
 celery==4.1.0
-Flask-SocketIO==2.9.2
 Flask==0.12.2
+Flask-Migrate==2.1.1
+Flask-Redis==0.3.0
+Flask-SocketIO==2.9.2
 gunicorn==19.7.1
 raven==6.3.0
 blinker==1.4
