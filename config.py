@@ -1,37 +1,61 @@
 # -*-coding:utf-8-*-
-'''Configuration file'''
+"""Configuration file"""
+from logging.config import dictConfig
 
 
 class Config(object):
-    '''Base configuration'''
+    """Basic general config"""
     DEBUG = True
     TESTING = False
 
     @classmethod
     def init_app(cls, app):
-        '''custom classmethod'''
-        pass
+        """Class method"""
+        # configure logging
+        dictConfig({
+            'version': 1,
+            'formatters': {'default': {
+                'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+            }},
+            'handlers': {'wsgi': {
+                'class': 'logging.StreamHandler',
+                'stream': 'ext://flask.logging.wsgi_errors_stream',
+                'formatter': 'default'
+            }},
+            'root': {
+                'level': 'INFO',
+                'handlers': ['wsgi']
+            }
+        })
 
 
-class Development(Config):
-    '''Development mode'''
-    pass
+class DevelopmentConfig(Config):
+    """Development mode"""
+    @classmethod
+    def init_app(cls, app):
+        Config.init_app(app)
 
 
-class Production(Config):
-    '''Production mode'''
+class ProductionConfig(Config):
+    """Development mode"""
     DEBUG = False
+    @classmethod
+    def init_app(cls, app):
+        Config.init_app(app)
 
 
-class Testing(Config):
-    '''Testing mode'''
+class TestingConfig(Config):
+    """Testing config"""
     TESTING = True
+    @classmethod
+    def init_app(cls, app):
+        Config.init_app(app)
 
 
 CONFIG = {
-    'development': Development,
-    'testing': Testing,
-    'production': Production,
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'production': ProductionConfig,
 
-    'default': Development
+    'default': DevelopmentConfig
 }
