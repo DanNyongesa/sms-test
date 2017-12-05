@@ -11,25 +11,27 @@
     </h5>
     <hr>
     {% if topic.screens.count() %}
-    {% for screen in topic.screens %}
-    <div class="col-md-4">
-        <div class="card" style="margin: 3px;">
-            <div class="card-body">
-                <h4 class="card-title">Screen Number {{ screen.index }}</h4>
-                <h6 class="card-subtitle mb-2 text-muted">created on </h6>
-                <p class="card-text">{{ screen.text }}</p>
-                <a href="{{ url_for('.edit_screen', id=screen.id)}}" class="card-link btn btn-warning btn-sm"><span><i
-                        class="fa fa-pencil"
-                        aria-hidden="true"></i></span>
-                    edit</a>
-                <a href="{{ url_for('.delete_screen', id=screen.id)}}"
-                   class="card-link btn btn-danger btn-sm"><span><i class="fa fa-trash"
-                                                                    aria-hidden="true"></i></span>
-                    delete</a>
+    <div class="row">
+        {% for screen in topic.screens %}
+        <div class="col-md-4">
+            <div class="card" style="margin: 3px;">
+                <div class="card-body">
+                    <h4 class="card-title">Screen #{{ loop.index }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">created on {{ moment(screen.timestamp).format('L')}} </h6>
+                    <p class="card-text">{{ screen.text }}</p>
+                    <a href="{{ url_for('.edit_screen', id=screen.id)}}" class="card-link btn btn-primary btn-sm"><span><i
+                            class="fa fa-pencil"
+                            aria-hidden="true"></i></span>
+                        edit</a>
+                    <a href="{{ url_for('.delete_screen', id=screen.id)}}"
+                       class="card-link btn btn-danger btn-sm float-right"><span><i class="fa fa-trash"
+                                                                        aria-hidden="true"></i></span>
+                        delete</a>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
     {% else %}
     <p class="text-muted justify-content-center">No screens configured at the moment <a
             href="{{ url_for('.add_screen', slug=topic.slug)}}"><span><i class="fa fa-plus"

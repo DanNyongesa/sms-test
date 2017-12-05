@@ -39,7 +39,7 @@ class Screen(db.Model, CRUDMixin):
     __tablename__ = 'screens'
     id = Column(Integer, primary_key=True)
     text = Column(String, nullable=False)
-    index = Column(Integer, nullable=False, index=True, autoincrement=True, default=0)
+    timestamp = Column(DateTime, default=kenya_time)
     topic_id = Column(Integer, ForeignKey('topics.id'))
 
     def __repr__(self):
