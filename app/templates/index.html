@@ -1,2 +1,12 @@
 {% extends "base.html" %}
-<p>Hello world</p>
+{% block nav_home %}active{% endblock %}
+{% block page_content %}
+<!-- Jumbotron -->
+    <div class="jumbotron">
+      <h1>A Shortcode SMS Service</h1>
+      <p class="lead">Easily manage an interactive two way SMS service</p>
+      <p>
+        <a class="btn btn-sm btn-success" href="{{ url_for('main.add_topic')}}" role="button">Get Started</a>
+      </p>
+    </div>
+{% endblock %}

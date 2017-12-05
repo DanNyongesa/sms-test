@@ -1,10 +1,12 @@
 from flask import Flask, render_template
 from flask_redis import FlaskRedis
+from flask_moment import Moment
 from config import CONFIG
 from .database import db
 from .africastalkinggateway import AT_gateway
 
 redis = FlaskRedis()
+moment = Moment()
 
 def create_app(config_name):
     '''Application factory to initialise and configure the application'''
@@ -17,6 +19,9 @@ def create_app(config_name):
 
     # intialize redis
     redis.init_app(app)
+
+    # intialize flask moment for formating of datetimes
+    moment.init_app(app)
 
     # intialize Africa's Talking API Gateway wrapper
     AT_gateway.init_app(app)

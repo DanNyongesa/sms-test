@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title_text %}Add Topic{% endblock %}
+{% block nav_addTopics %}active{% endblock %}
+{% block page_content %}
+<div class="container">
+    <div class="row clearfix justify-content-md-center">
+        <div class="card-group">
+        <div class="col-sm-12 col-md-6">
+            <div class="card mb-3" style="border: none;">
+                <div class="card-body">
+                    <h4 class="card-title">Add Topic</h4>
+
+                    <form method="post" action="">
+                        {{ form.csrf_token }}
+                        <div class="form-group">
+                            <label for="title">{{ form.title.label }}</label>
+                            {{ form.title(class_="form-control", required=True)}}
+                        </div>
+                        {{ form.submit(class_="btn btn-success")}}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="card bg-light mb-3" style="border: none;">
+                <div class="card-body">
+                    <h4 class="card-title">What are some Topics Best Practices?</h4>
+                    <ul>
+                        <li>Short and concise (12 words Recommendend)</li>
+                        <li>To the point and descriptive</li>
+                        <li>e.g Introduction To Farming</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

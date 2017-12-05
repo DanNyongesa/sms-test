@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title_text %}{{ topic.title }} | New Screen{% endblock %}
+{% block nav_topics %}active{% endblock %}
+{% block page_content %}
+<div class="container">
+    <div class="row clearfix justify-content-md-center">
+        <div class="card-group">
+            <div class="col-sm-12 col-md-6">
+                <div class="card mb-3" style="border: none;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ topic.title}} New Screen</h4>
+
+                        <form method="post" action="">
+                            {{ form.csrf_token }}
+                            <div class="form-group">
+                                <label for="text">{{ form.text.label }}</label>
+                                {{ form.text(class_="form-control", required=True, placeholder="Enter screen text")}}
+                            </div>
+                            {{ form.submit(class_="btn btn-success")}}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="card bg-light mb-3" style="border: none;">
+                    <div class="card-body">
+                        <h4 class="card-title">What are some Screen Text Best Practices?</h4>
+                        <ul>
+                            <li>Fully describe the topic at hand</li>
+                            <li>A large topic should be broken down into several screen texts</li>
+                            <li>e.g Farming is growing crops or keeping animals by people for food and raw materials.
+                                Farming is a part of agriculture.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

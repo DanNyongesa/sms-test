@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title_text %}All Topics{% endblock %}
+{% block nav_topics %}active{% endblock %}
+{% block page_content %}
+<div class="container">
+    <div class="list-group">
+        {% for topic in topics %}
+        <a href="{{ url_for('main.get_topic', slug=topic.slug)}}" class="list-group-item list-group-item-action flex-column align-items-start" style="border-left:none; border-right:none;">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ topic.title|title }}</h5>
+                <small>created <span class="badge badge-success badge-pill">{{ moment(topic.created_at, local=True).fromNow() }}</span></small>
+            </div>
+
+            <small>Number of screens <span class="badge badge-secondary">{{ topic.screens.count() }}</span></small>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

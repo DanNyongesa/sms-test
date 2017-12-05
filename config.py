@@ -11,6 +11,7 @@ class Config(object):
     """Basic general config"""
     debug = False
     TESTING = False
+    SECRET_KEY = os.environ.get('FLASK_SECRET', 'my secret key')
 
     # sqlalchemy configs
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite'))
